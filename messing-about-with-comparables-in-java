@@ -1,0 +1,61 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+/*A small script I made after an exam to help me work out how to implement Comparables 
+and use the CompareTo(X other); method, following exam feedback*/
+
+public class Main {
+
+   public static void main(String[] args) {
+       List<X> list = new ArrayList<>();
+       Random random = new Random();
+
+
+       for (int i = 0; i < 10; i++) {
+           X newArrValue = new X(random.nextInt(10000));
+           list.add(newArrValue);
+           System.out.println("Generated: " + newArrValue);
+       }
+
+
+       X mem = list.get(0);
+       for (X y : list) {
+           if (y.compareTo(mem) == 1) {
+               mem = y;
+           }
+       }
+
+
+       System.out.println("All values in the list:");
+       for (X x : list) {
+           System.out.println(x);
+       }
+
+
+       System.out.println("Max value: " + mem.getValue());
+   }
+}
+
+class X implements Comparable<X> {
+   private int value;
+
+   public X(int value) {
+       this.value = value;
+   }
+
+   public int getValue() {
+       return value;
+   }
+
+   @Override
+   public int compareTo(X other) {
+       return Integer.compare(this.value, other.value);
+   }
+
+   @Override
+   public String toString() {
+       return "X{" + "value=" + value + '}';
+   }
+}
+ 
